@@ -21,8 +21,22 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
             </nav>
 
             <div className="shrink-0">
-              {/* replace /logo.svg with your real logo file when available */}
-              <Image src="/logo.svg" alt="Kahlke CyberSystems Logo" width={120} height={52} className="h-9 w-auto" />
+              {/* Navy logo for light mode */}
+              <Image
+                src="/logo.png"
+                alt="Kahlke CyberSystems"
+                width={120}
+                height={52}
+                className="h-10 w-auto [html.decrypt_&]:hidden"
+              />
+              {/* White SVG logo for decrypt mode */}
+              <Image
+                src="/logo_white_svg.svg"
+                alt="Kahlke CyberSystems"
+                width={120}
+                height={52}
+                className="hidden h-10 w-auto [html.decrypt_&]:block"
+              />
             </div>
           </div>
         </header>
@@ -33,7 +47,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
               <div className="font-bold">Kontakt</div>
-              <div className="text-navy/80 [html.decrypt_&]:text-neutral/80">
+              <div>
                 Lars Kahlke · Zähringerstrasse 35 · 3012 Bern
               </div>
               <div className="mt-2">
