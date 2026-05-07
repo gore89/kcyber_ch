@@ -32,7 +32,7 @@ export default function HomePage() {
 
         <div className="text-left">
           <h1 className="text-xl font-black tracking-tight md:text-2xl">IT-Security für KMU in der Schweiz</h1>
-          <p className="mt-4 opacity-80">
+          <p className="mt-4 text-navy/90 [html.decrypt_&]:text-neutral/85">
             Ich helfe Praxen, Kanzleien und Kleinunternehmen dabei, Risiken zu reduzieren – ohne Overkill.
             Von Security-Checks über Härtung bis Recovery, wenn’s ernst wird.
           </p>
