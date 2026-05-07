@@ -7,53 +7,62 @@
 
 :root {
   --navy: #2f3b4f;
-  --neutral: #d9d9d9;
-  --decrypt-bg: #05070a;
+  --neutral-bg: #f8f8f8;
+  --decrypt-bg: #141d2b;
   --decrypt-green-1: #056346;
-  --decrypt-green-2: #3fa687;
+  --decrypt-green-2: #9fef00;
 }
 
-html {
-  font-family: Lato, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+/* ── NORMAL MODE ── */
+html, body {
+  font-family: Lato, system-ui, -apple-system, sans-serif;
+  background-color: var(--neutral-bg);
+  color: var(--navy);
 }
 
-body { color: var(--navy); }
-
-html.decrypt {
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+/* ── DECRYPT MODE ── */
+html.decrypt, html.decrypt body {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background-color: var(--decrypt-bg);
+  color: var(--decrypt-green-2);
 }
 
-html.decrypt body { color: var(--neutral); }
-
-/* terminal-ish cursor */
-html.decrypt, html.decrypt * {
-  cursor: cell;
+html.decrypt * {
+  cursor: cell !important;
 }
 
-/* subtle scanlines overlay in decrypt mode */
-html.decrypt body::before {
+/* scanline overlay */
+html.decrypt body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
+  z-index: 9999;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(63, 166, 135, 0.06),
-    rgba(63, 166, 135, 0.06) 1px,
-    rgba(0, 0, 0, 0) 3px,
-    rgba(0, 0, 0, 0) 6px
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
   );
-  mix-blend-mode: overlay;
-  opacity: 0.35;
 }
 
+/* glitch animation */
 @keyframes glitch {
-  0% { transform: translate(0); filter: none; }
-  20% { transform: translate(-1px, 1px); filter: contrast(1.2) saturate(1.1); }
-  40% { transform: translate(1px, -1px); filter: hue-rotate(10deg); }
-  60% { transform: translate(-1px, 0); filter: none; }
-  80% { transform: translate(1px, 1px); filter: contrast(1.1); }
+  0%   { transform: translate(0); filter: none; }
+  15%  { transform: translate(-2px, 1px); filter: hue-rotate(15deg) brightness(1.2); }
+  30%  { transform: translate(2px, -1px); filter: hue-rotate(-15deg); }
+  45%  { transform: translate(-1px, 2px); filter: brightness(1.3); }
+  60%  { transform: translate(1px, 0); filter: none; }
+  80%  { transform: translate(-1px, -1px); filter: hue-rotate(5deg); }
   100% { transform: translate(0); filter: none; }
 }
 
-.glitch { animation: glitch 320ms ease-in-out 1; }
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+.glitch {
+  animation: glitch 400ms ease-in-out 1;
+}
