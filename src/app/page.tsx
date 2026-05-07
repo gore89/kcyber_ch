@@ -15,7 +15,7 @@ export default function HomePage() {
             <span className="opacity-90">professioneller Schutz für Ärzte, Kanzleien und Kleinunternehmen.</span>
           </h1>
           <p className="max-w-prose opacity-80">
-            Seriös, pragmatisch und technisch tief: Security-Checks, Härtung, Recovery, Awareness – damit dein Betrieb auch morgen noch läuft.
+            Seriös, pragmatisch und technisch tief: Security-Checks, Härtung, Recovery und Awareness – damit dein Betrieb auch morgen noch läuft.
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <a
@@ -59,10 +59,10 @@ export default function HomePage() {
           },
           {
             title: 'Härtung & Betrieb',
-            body: 'Firewall, VPN, EDR/AV, Backup-Strategien, Patch- & Rechtekonzept – sauber umgesetzt.',
+            body: 'Firewall, VPN, Backup/Restore, Patch- & Rechtekonzept – sauber umgesetzt und dokumentiert.',
           },
           {
-            title: 'Recovery & Incident Support',
+            title: 'Incident Support',
             body: 'Wenn es brennt: Analyse, Wiederherstellung, Lessons Learned und echte Resilienz.',
           },
         ].map((c) => (
@@ -74,6 +74,38 @@ export default function HomePage() {
             <p className="mt-2 opacity-80">{c.body}</p>
           </div>
         ))}
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-black tracking-tight">Kurz & klar</h2>
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          {[
+            {
+              q: 'Für wen ist das?',
+              a: 'Für KMU in der Schweiz – besonders Praxen, Kanzleien und kleine Teams ohne eigene Security-Abteilung.',
+            },
+            {
+              q: 'Was ist ein guter Start?',
+              a: 'Ein Security-Check mit klaren Prioritäten (Quick Wins + Massnahmenplan).',
+            },
+            {
+              q: 'Machst du auch Recovery nach Ransomware?',
+              a: 'Ja: Analyse, Recovery, Härtung und Backup-Konzept, damit es nicht wieder passiert.',
+            },
+            {
+              q: 'DSG/Compliance?',
+              a: 'Ja: Risikoanalyse, Massnahmen, Dokumentation und Awareness-Schulungen – pragmatisch und umsetzbar.',
+            },
+          ].map((i) => (
+            <div
+              key={i.q}
+              className="rounded-2xl border border-navy/15 bg-white/60 p-6 shadow-sm [html.decrypt_&]:border-decryptGreen2/25 [html.decrypt_&]:bg-decryptBg/60"
+            >
+              <div className="font-black">{i.q}</div>
+              <p className="mt-2 opacity-80">{i.a}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </SiteShell>
   );
