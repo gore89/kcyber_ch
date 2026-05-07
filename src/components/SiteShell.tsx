@@ -14,9 +14,9 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
 
             <nav className="flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-navy [html.decrypt_&]:text-neutral">
               <Link className="hover:underline" href="/">home</Link>
-              <span className="opacity-40">|</span>
+              <span className="">|</span>
               <Link className="hover:underline" href="/referenzen">Referenzen</Link>
-              <span className="opacity-40">|</span>
+              <span className="">|</span>
               <Link className="hover:underline" href="/zu-mir">zu mir</Link>
             </nav>
 
@@ -34,12 +34,12 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
               <div className="font-bold">Kontakt</div>
-              <div className="text-navy/80 [html.decrypt_&]:text-neutral/80">
+              <div className="text-navy [html.decrypt_&]:text-neutral/80">
                 Lars Kahlke · Zähringerstrasse 35 · 3012 Bern
               </div>
               <div className="mt-2">
                 <a className="underline" href="mailto:larskah@kcyber.ch">larskah@kcyber.ch</a>
-                <span className="opacity-70"> · </span>
+                <span className=""> · </span>
                 <a className="underline" href="tel:+41799438610">079 943 86 10</a>
               </div>
             </div>

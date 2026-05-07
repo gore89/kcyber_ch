@@ -4,7 +4,7 @@ export default function KontaktPage() {
   return (
     <SiteShell>
       <h1 className="text-3xl font-black tracking-tight">Kontakt</h1>
-      <p className="mt-3 max-w-prose opacity-80">
+      <p className="mt-3 max-w-prose ">
         Schreib mir kurz, was du absichern willst (Branche/Grösse/Setup) – ich melde mich mit einem pragmatischen nächsten Schritt.
       </p>
 
@@ -20,7 +20,7 @@ export default function KontaktPage() {
         </a>
 
         <div className="mt-5 font-bold">Adresse</div>
-        <div className="opacity-85">Lars Kahlke, Zähringerstrasse 35, 3012 Bern</div>
+        <div className="">Lars Kahlke, Zähringerstrasse 35, 3012 Bern</div>
       </div>
     </SiteShell>
   );

@@ -32,11 +32,11 @@ export default function HomePage() {
 
         <div className="text-left">
           <h1 className="text-xl font-black tracking-tight md:text-2xl">IT-Security für KMU in der Schweiz</h1>
-          <p className="mt-4 text-navy/90 [html.decrypt_&]:text-neutral/85">
+          <p className="mt-4 text-navy [html.decrypt_&]:text-neutral/85">
             Ich helfe Praxen, Kanzleien und Kleinunternehmen dabei, Risiken zu reduzieren – ohne Overkill.
             Von Security-Checks über Härtung bis Recovery, wenn’s ernst wird.
           </p>
-          <ul className="mt-5 list-disc space-y-2 pl-5 opacity-85">
+          <ul className="mt-5 list-disc space-y-2 pl-5 ">
             <li>Security-Check & Massnahmenplan</li>
             <li>Firewall/VPN, Backup/Restore, Rechte & Patch-Management</li>
             <li>Incident Support (Ransomware/Recovery) + Lessons Learned</li>
@@ -48,7 +48,7 @@ export default function HomePage() {
       <div className="mt-12 flex justify-center">
         <a
           href="mailto:larskah@kcyber.ch"
-          className="rounded-xl bg-navy px-6 py-3 text-base font-black text-white shadow hover:opacity-95 [html.decrypt_&]:bg-decryptGreen1"
+          className="rounded-xl bg-navy px-6 py-3 text-base font-black text-white shadow hover: [html.decrypt_&]:bg-decryptGreen1"
         >
           Jetzt Kontakt herstellen
         </a>

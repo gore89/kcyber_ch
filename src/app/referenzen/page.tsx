@@ -25,7 +25,7 @@ export default function ReferenzenPage() {
   return (
     <SiteShell>
       <h1 className="text-3xl font-black tracking-tight">Referenzen</h1>
-      <p className="mt-3 max-w-prose opacity-80">
+      <p className="mt-3 max-w-prose ">
         Authentische Case Studies – anonymisiert, aber realistisch. Fokus: Wirkung, nicht Marketing.
       </p>
 
@@ -36,7 +36,7 @@ export default function ReferenzenPage() {
             className="rounded-2xl border border-navy/15 bg-white/60 p-6 shadow-sm [html.decrypt_&]:border-decryptGreen2/25 [html.decrypt_&]:bg-decryptBg/60"
           >
             <h2 className="text-xl font-black">{c.title}</h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 opacity-85">
+            <ul className="mt-4 list-disc space-y-2 pl-5 ">
               {c.points.map((p) => (
                 <li key={p}>{p}</li>
               ))}
