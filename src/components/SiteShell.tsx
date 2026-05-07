@@ -3,53 +3,54 @@ import DecryptToggle from './DecryptToggle';
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-dvh bg-neutral/40 text-navy [html.decrypt_&]:bg-decryptBg [html.decrypt_&]:text-neutral">
-      <header className="mx-auto w-full max-w-6xl px-4 py-6">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex flex-col gap-3">
-            <DecryptToggle />
-            <Link href="/" className="text-lg font-black tracking-tight">
-              Kahlke <span className="opacity-80">CyberSystems</span>
-            </Link>
+    <div className="min-h-dvh bg-white text-navy [html.decrypt_&]:bg-decryptBg [html.decrypt_&]:text-neutral">
+      <div className="mx-auto w-full max-w-5xl px-4 py-8">
+        <header className="relative rounded-3xl border border-navy/15 bg-white/80 p-6 shadow-sm [html.decrypt_&]:border-decryptGreen2/25 [html.decrypt_&]:bg-decryptBg/60">
+          <div className="flex items-start justify-between gap-4">
+            <div className="shrink-0">
+              <DecryptToggle />
+            </div>
+
+            <nav className="flex flex-wrap items-center justify-center gap-4 text-sm font-semibold">
+              <Link className="hover:underline" href="/">home</Link>
+              <span className="opacity-40">|</span>
+              <Link className="hover:underline" href="/referenzen">Referenzen</Link>
+              <span className="opacity-40">|</span>
+              <Link className="hover:underline" href="/zu-mir">zu mir</Link>
+            </nav>
+
+            <div className="shrink-0 text-right">
+              <div className="text-xs font-black tracking-wide">KCS</div>
+              <div className="text-[10px] opacity-70">Kahlke CyberSystems</div>
+            </div>
           </div>
 
-          <nav className="flex flex-wrap items-center justify-end gap-3 text-sm font-semibold">
-            <Link className="hover:underline" href="/">Home</Link>
-            <Link className="hover:underline" href="/site/referenzen">Referenzen</Link>
-            <Link className="hover:underline" href="/site/ueber-mich">Über mich</Link>
-            <Link className="hover:underline" href="/site/kontakt">Kontakt</Link>
-          </nav>
-        </div>
-      </header>
+          <div className="mt-6 h-px w-full bg-navy/10 [html.decrypt_&]:bg-decryptGreen2/20" />
+        </header>
 
-      <main className="mx-auto w-full max-w-6xl px-4 pb-16">{children}</main>
+        <main className="mt-10">{children}</main>
 
-      <footer className="border-t border-navy/15 [html.decrypt_&]:border-decryptGreen2/25">
-        <div className="mx-auto w-full max-w-6xl px-4 py-10 text-sm">
-          <div className="grid gap-6 md:grid-cols-3">
-            <div>
-              <div className="font-bold">Kahlke CyberSystems</div>
-              <div className="opacity-80">Massgeschneiderte IT-Security für KMU</div>
-            </div>
+        <footer className="mt-14 border-t border-navy/15 pt-8 text-sm [html.decrypt_&]:border-decryptGreen2/25">
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
               <div className="font-bold">Kontakt</div>
               <div className="opacity-80">
-                Lars Kahlke<br />
-                Zähringerstrasse 35<br />
-                3012 Bern
+                Lars Kahlke · Zähringerstrasse 35 · 3012 Bern
               </div>
               <div className="mt-2">
                 <a className="underline" href="mailto:larskah@kcyber.ch">larskah@kcyber.ch</a>
-                <div className="opacity-80">079 943 86 10</div>
+                <span className="opacity-70"> · </span>
+                <a className="underline" href="tel:+41799438610">079 943 86 10</a>
               </div>
             </div>
-            <div className="flex items-start gap-4 md:justify-end">
+            <div className="flex gap-4">
               <Link className="hover:underline" href="/legal/impressum">Impressum</Link>
               <Link className="hover:underline" href="/legal/datenschutz">Datenschutz</Link>
+              <Link className="hover:underline" href="/kontakt">Kontakt</Link>
             </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 }
