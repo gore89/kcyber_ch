@@ -11,60 +11,52 @@ function haptic() {
 }
 
 const STEPS = ['Initializing...', 'Bypassing firewall...', 'Decrypting... 38%', 'Decrypting... 71%', 'Access granted.'];
+const STEPS_OFF = ['Encrypting...', 'Restoring...', 'Done.'];
 
 export default function DecryptToggle() {
   const [decrypt, setDecrypt] = useState(false);
   const [step, setStep] = useState<string | null>(null);
 
+  // Do NOT restore from localStorage — always start in normal mode
   useEffect(() => {
-    const stored = typeof window !== 'undefined' ? localStorage.getItem(DECRYPT_STORAGE_KEY) : null;
-    if (stored === '1') {
-      setDecrypt(true);
-      document.documentElement.classList.add('decrypt');
-    }
+    document.documentElement.classList.remove('decrypt');
+    localStorage.removeItem(DECRYPT_STORAGE_KEY);
   }, []);
 
   async function toggle() {
-    if (step) return; // mid-animation
+    if (step) return;
     const next = !decrypt;
     haptic();
 
-    if (next) {
-      // animate in
-      for (const s of STEPS) {
-        setStep(s);
-        await new Promise((r) => setTimeout(r, 220));
-      }
+    const sequence = next ? STEPS : STEPS_OFF;
+    for (const s of sequence) {
+      setStep(s);
+      await new Promise((r) => setTimeout(r, 220));
     }
 
     setDecrypt(next);
-    const root = document.documentElement;
-    if (next) root.classList.add('decrypt');
-    else root.classList.remove('decrypt');
-    localStorage.setItem(DECRYPT_STORAGE_KEY, next ? '1' : '0');
+    if (next) document.documentElement.classList.add('decrypt');
+    else document.documentElement.classList.remove('decrypt');
 
-    await new Promise((r) => setTimeout(r, 200));
+    await new Promise((r) => setTimeout(r, 150));
     setStep(null);
   }
 
   return (
-    <div className="flex flex-col items-start gap-1">
-      <button
-        type="button"
-        onClick={toggle}
-        className={[
-          'relative inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-xs font-bold tracking-wider transition-all duration-200',
-          decrypt
-            ? 'border-[#9fef00]/50 bg-[#141d2b] text-[#9fef00] shadow-[0_0_12px_rgba(159,239,0,0.25)]'
-            : 'border-gray-900 bg-gray-900 text-[#9fef00] shadow-sm hover:shadow-[0_0_8px_rgba(159,239,0,0.2)]',
-          step ? 'glitch' : '',
-        ].join(' ')}
-        aria-label="Toggle decrypt mode"
-      >
-        <span className="font-mono tracking-widest">
-          {step ? step : decrypt ? '[ DECRYPT: ON ]' : '[ DECRYPT ]'}
-        </span>
-      </button>
-    </div>
+    <button
+      type="button"
+      onClick={toggle}
+      className={[
+        'inline-flex items-center rounded-md border px-3 py-1.5 text-xs font-bold tracking-widest transition-all duration-200',
+        'border-gray-900 bg-gray-900 text-[#9fef00]',
+        decrypt ? 'shadow-[0_0_10px_rgba(159,239,0,0.3)]' : 'hover:shadow-[0_0_6px_rgba(159,239,0,0.15)]',
+        step ? 'opacity-90' : '',
+      ].join(' ')}
+      aria-label="Toggle decrypt mode"
+    >
+      <span className="font-mono">
+        {step ?? (decrypt ? '[ DECRYPT: ON ]' : '[ DECRYPT ]')}
+      </span>
+    </button>
   );
 }
