@@ -4,12 +4,26 @@ import DecryptToggle from './DecryptToggle';
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-dvh bg-white text-navy [html.decrypt_&]:bg-[#141d2b] [html.decrypt_&]:text-[#9fef00]">
+    <div className="min-h-dvh bg-[#eef0f3] text-[#2f3b4f] [html.decrypt_&]:bg-[#05070a] [html.decrypt_&]:text-[#3fa687]">
       <div className="mx-auto w-full max-w-5xl px-6">
 
-        {/* Nav row */}
-        <div className="flex items-center justify-between gap-6 py-5">
-          {/* Logo */}
+        {/* ── HEADER ── */}
+        <header className="flex items-center justify-between gap-6 py-5">
+          {/* Decrypt button – top left */}
+          <div className="shrink-0">
+            <DecryptToggle />
+          </div>
+
+          {/* Nav – center */}
+          <nav className="flex items-center gap-5 text-sm font-semibold">
+            <Link href="/" className="hover:opacity-70">home</Link>
+            <span className="opacity-20">|</span>
+            <Link href="/referenzen" className="hover:opacity-70">Referenzen</Link>
+            <span className="opacity-20">|</span>
+            <Link href="/zu-mir" className="hover:opacity-70">zu mir</Link>
+          </nav>
+
+          {/* Logo – top right */}
           <Link href="/" className="shrink-0">
             <Image
               src="/logo.png"
@@ -26,51 +40,37 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
               className="hidden h-9 w-auto [html.decrypt_&]:block"
             />
           </Link>
+        </header>
 
-          {/* Nav links */}
-          <nav className="flex items-center gap-5 text-sm font-semibold">
-            <Link className="hover:underline" href="/">home</Link>
-            <span className="opacity-25">|</span>
-            <Link className="hover:underline" href="/referenzen">Referenzen</Link>
-            <span className="opacity-25">|</span>
-            <Link className="hover:underline" href="/zu-mir">zu mir</Link>
-          </nav>
+        {/* ── SEPARATOR ── */}
+        <div className="h-px w-full rounded-full bg-[#2f3b4f]/12 [html.decrypt_&]:bg-[#3fa687]/20" />
 
-          {/* Decrypt button */}
-          <div className="shrink-0">
-            <DecryptToggle />
-          </div>
-        </div>
+        {/* ── MAIN ── */}
+        <main className="pb-20 pt-12">{children}</main>
 
-        {/* Separator */}
-        <div className="h-px w-full bg-navy/12 [html.decrypt_&]:bg-[#9fef00]/20" />
+        {/* ── FOOTER SEPARATOR ── */}
+        <div className="h-px w-full rounded-full bg-[#2f3b4f]/12 [html.decrypt_&]:bg-[#3fa687]/20" />
 
-        {/* Content */}
-        <main className="pb-16 pt-10">{children}</main>
-
-        {/* Footer separator */}
-        <div className="h-px w-full bg-navy/12 [html.decrypt_&]:bg-[#9fef00]/20" />
-
-        <footer className="py-8 text-sm">
-          <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+        {/* ── FOOTER ── */}
+        <footer className="py-10 text-sm text-[#2f3b4f]/70 [html.decrypt_&]:text-[#3fa687]/70">
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
-              <div className="font-bold">Kahlke CyberSystems</div>
-              <div className="mt-1 text-navy/60 [html.decrypt_&]:text-[#9fef00]/60">
-                Lars Kahlke · Zähringerstrasse 35 · 3012 Bern
-              </div>
-              <div className="mt-2">
-                <a className="underline" href="mailto:larskah@kcyber.ch">larskah@kcyber.ch</a>
-                <span className="mx-2 opacity-30">·</span>
-                <a className="underline" href="tel:+41799438610">079 943 86 10</a>
+              <div className="font-bold text-[#2f3b4f] [html.decrypt_&]:text-[#3fa687]">Kahlke CyberSystems</div>
+              <div className="mt-1">Lars Kahlke · Zähringerstrasse 35 · 3012 Bern</div>
+              <div className="mt-2 flex gap-3">
+                <a href="mailto:larskah@kcyber.ch" className="underline underline-offset-2">larskah@kcyber.ch</a>
+                <span className="opacity-30">·</span>
+                <a href="tel:+41799438610" className="underline underline-offset-2">079 943 86 10</a>
               </div>
             </div>
-            <div className="flex items-center gap-5 text-navy/60 [html.decrypt_&]:text-[#9fef00]/60">
-              <Link className="hover:underline" href="/legal/impressum">Impressum</Link>
-              <Link className="hover:underline" href="/legal/datenschutz">Datenschutz</Link>
-              <Link className="hover:underline" href="/kontakt">Kontakt</Link>
+            <div className="flex items-center gap-5">
+              <Link href="/legal/impressum" className="hover:underline">Impressum</Link>
+              <Link href="/legal/datenschutz" className="hover:underline">Datenschutz</Link>
+              <Link href="/kontakt" className="hover:underline">Kontakt</Link>
             </div>
           </div>
         </footer>
+
       </div>
     </div>
   );

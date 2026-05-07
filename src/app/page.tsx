@@ -4,29 +4,23 @@ import SiteShell from '@/components/SiteShell';
 export default function HomePage() {
   return (
     <SiteShell>
-      {/* Quote */}
-      <section className="text-center">
-        <blockquote className="mx-auto max-w-2xl text-2xl font-black leading-snug md:text-4xl">
-          „Sicherheit erschwinglich machen ist meine Mission"
-        </blockquote>
-      </section>
 
-      {/* Hero: photo + text */}
-      <section className="mx-auto mt-12 grid max-w-4xl gap-10 md:grid-cols-2 md:items-start">
+      {/* ── HERO ── */}
+      <section className="grid gap-10 md:grid-cols-[280px_1fr] md:items-start">
 
-        {/* Profile image — bounded, not fullscreen */}
-        <div className="mx-auto w-full max-w-[280px]">
-          <div className="relative h-[340px] overflow-hidden rounded-2xl border border-navy/15 bg-[#d9d9d9]/40 shadow [html.decrypt_&]:border-[#9fef00]/20 [html.decrypt_&]:bg-[#141d2b]">
+        {/* Profile image – floating card */}
+        <div className="mx-auto w-full max-w-[280px] md:mx-0">
+          <div className="relative h-[340px] overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(47,59,79,0.18)] [html.decrypt_&]:shadow-[0_0_32px_rgba(63,166,135,0.2)]">
             <Image
               src="/images/profile-light.svg"
-              alt="Profilbild"
+              alt="Lars Kahlke"
               fill
               className="object-cover [html.decrypt_&]:hidden"
               priority
             />
             <Image
               src="/images/profile-dark.svg"
-              alt="Profilbild (Decrypt)"
+              alt="Lars Kahlke"
               fill
               className="hidden object-cover [html.decrypt_&]:block"
               priority
@@ -35,31 +29,58 @@ export default function HomePage() {
         </div>
 
         {/* Text */}
-        <div className="flex flex-col justify-start pt-2">
-          <h1 className="text-xl font-black tracking-tight md:text-2xl">
-            IT-Security für KMU in der Schweiz
+        <div className="flex flex-col justify-center">
+          <h1 className="glow text-3xl font-black leading-tight tracking-tight md:text-5xl">
+            Massgeschneiderte IT-Security für KMU – professioneller Schutz für Ärzte, Kanzleien und Kleinunternehmen.
           </h1>
-          <p className="mt-4 text-navy/80 [html.decrypt_&]:text-[#9fef00]/80">
-            Ich helfe Praxen, Kanzleien und Kleinunternehmen, Risiken zu reduzieren – ohne Overkill.
-            Von Security-Checks über Härtung bis Recovery, wenn's ernst wird.
+          <p className="mt-5 text-base leading-relaxed text-[#2f3b4f]/75 [html.decrypt_&]:text-[#3fa687]/80">
+            Ich helfe KMU in der Schweiz dabei, Risiken zu reduzieren – ohne Overkill.
+            Von Security-Checks über Härtung bis Recovery, wenn es ernst wird.
           </p>
-          <ul className="mt-5 list-disc space-y-2 pl-5 text-navy/80 [html.decrypt_&]:text-[#9fef00]/80">
-            <li>Security-Check &amp; Massnahmenplan</li>
-            <li>Firewall/VPN, Backup/Restore, Patch- &amp; Rechtekonzept</li>
-            <li>Incident Support (Ransomware/Recovery)</li>
-            <li>DSG-Audit &amp; Awareness-Schulungen</li>
-          </ul>
-
           <div className="mt-8">
             <a
               href="mailto:larskah@kcyber.ch"
-              className="inline-block rounded-xl bg-navy px-6 py-3 text-sm font-black text-white shadow transition hover:opacity-90 [html.decrypt_&]:border [html.decrypt_&]:border-[#9fef00]/50 [html.decrypt_&]:bg-transparent [html.decrypt_&]:text-[#9fef00] [html.decrypt_&]:shadow-[0_0_12px_rgba(159,239,0,0.15)] [html.decrypt_&]:hover:bg-[#9fef00]/10"
+              className="inline-block rounded-xl bg-[#2f3b4f] px-7 py-3 text-sm font-black text-white shadow-[0_4px_18px_rgba(47,59,79,0.3)] transition hover:opacity-90 [html.decrypt_&]:border [html.decrypt_&]:border-[#3fa687]/50 [html.decrypt_&]:bg-transparent [html.decrypt_&]:text-[#3fa687] [html.decrypt_&]:shadow-[0_0_16px_rgba(63,166,135,0.25)] [html.decrypt_&]:hover:bg-[#3fa687]/10"
             >
-              Jetzt Kontakt herstellen
+              Erstgespräch vereinbaren →
             </a>
           </div>
         </div>
       </section>
+
+      {/* ── LEISTUNGEN ── */}
+      <section className="mt-16">
+        <h2 className="glow text-xl font-black tracking-tight md:text-2xl">Was ich tue</h2>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          {[
+            {
+              title: 'Security-Check',
+              desc: 'Analyse der Infrastruktur, Risikobewertung und konkreter Massnahmenplan – ohne Berater-Blabla.',
+            },
+            {
+              title: 'Firewall / VPN / Backup',
+              desc: 'Konfiguration, Härtung und Patch-Management für verlässliche Basisabsicherung.',
+            },
+            {
+              title: 'Incident Response',
+              desc: 'Ransomware, Datenverlust, Einbruch – ich helfe bei Analyse, Recovery und Lessons Learned.',
+            },
+            {
+              title: 'DSG-Audit & Schulung',
+              desc: 'Datenschutz-Grundlagen nach CH DSG und Awareness-Training für Ihr Team.',
+            },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl bg-white p-6 shadow-[0_4px_20px_rgba(47,59,79,0.1)] [html.decrypt_&]:border [html.decrypt_&]:border-[#3fa687]/20 [html.decrypt_&]:bg-[#0d1117]/80 [html.decrypt_&]:shadow-[0_0_20px_rgba(63,166,135,0.08)] [html.decrypt_&]:[backdrop-filter:blur(8px)]"
+            >
+              <h3 className="font-black text-[#2f3b4f] [html.decrypt_&]:text-[#3fa687]">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#2f3b4f]/70 [html.decrypt_&]:text-[#3fa687]/70">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
     </SiteShell>
   );
 }

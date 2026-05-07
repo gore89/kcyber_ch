@@ -1,45 +1,55 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { DECRYPT_STORAGE_KEY } from '@/lib/decrypt';
+
+const KEY = 'kcyber_decrypt';
 
 function haptic() {
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
-    // @ts-ignore
-    navigator.vibrate([25, 50, 25]);
+    navigator.vibrate([20, 60, 20]);
   }
 }
 
-const STEPS = ['Initializing...', 'Bypassing firewall...', 'Decrypting... 38%', 'Decrypting... 71%', 'Access granted.'];
-const STEPS_OFF = ['Encrypting...', 'Restoring...', 'Done.'];
-
 export default function DecryptToggle() {
-  const [decrypt, setDecrypt] = useState(false);
-  const [step, setStep] = useState<string | null>(null);
+  const [on, setOn] = useState(false);
+  const [label, setLabel] = useState('[ DECRYPT ]');
+  const [busy, setBusy] = useState(false);
 
-  // Do NOT restore from localStorage — always start in normal mode
+  // never restore – always start normal
   useEffect(() => {
     document.documentElement.classList.remove('decrypt');
-    localStorage.removeItem(DECRYPT_STORAGE_KEY);
+    localStorage.removeItem(KEY);
   }, []);
 
   async function toggle() {
-    if (step) return;
-    const next = !decrypt;
+    if (busy) return;
+    setBusy(true);
     haptic();
 
-    const sequence = next ? STEPS : STEPS_OFF;
-    for (const s of sequence) {
-      setStep(s);
-      await new Promise((r) => setTimeout(r, 220));
+    const next = !on;
+
+    if (next) {
+      const steps = [
+        'Initializing...',
+        'Bypassing firewall...',
+        'Decrypting... 35%',
+        'Decrypting... 78%',
+        'Access granted.',
+      ];
+      for (const s of steps) {
+        setLabel(s);
+        await new Promise((r) => setTimeout(r, 230));
+      }
+      document.documentElement.classList.add('decrypt');
+    } else {
+      setLabel('Encrypting...');
+      await new Promise((r) => setTimeout(r, 400));
+      document.documentElement.classList.remove('decrypt');
     }
 
-    setDecrypt(next);
-    if (next) document.documentElement.classList.add('decrypt');
-    else document.documentElement.classList.remove('decrypt');
-
-    await new Promise((r) => setTimeout(r, 150));
-    setStep(null);
+    setOn(next);
+    setLabel(next ? '[ DECRYPT: ON ]' : '[ DECRYPT ]');
+    setBusy(false);
   }
 
   return (
@@ -47,16 +57,17 @@ export default function DecryptToggle() {
       type="button"
       onClick={toggle}
       className={[
-        'inline-flex items-center rounded-md border px-3 py-1.5 text-xs font-bold tracking-widest transition-all duration-200',
-        'border-gray-900 bg-gray-900 text-[#9fef00]',
-        decrypt ? 'shadow-[0_0_10px_rgba(159,239,0,0.3)]' : 'hover:shadow-[0_0_6px_rgba(159,239,0,0.15)]',
-        step ? 'opacity-90' : '',
+        'inline-flex min-w-[148px] items-center justify-center rounded-lg border px-3 py-1.5',
+        'font-mono text-xs font-bold tracking-widest',
+        'transition-shadow duration-200',
+        on
+          ? 'border-[#3fa687]/60 bg-[#05070a] text-[#3fa687] shadow-[0_0_14px_rgba(63,166,135,0.35)]'
+          : 'border-gray-800 bg-gray-900 text-[#3fa687] hover:shadow-[0_0_8px_rgba(63,166,135,0.2)]',
+        busy ? 'glitch opacity-80' : '',
       ].join(' ')}
       aria-label="Toggle decrypt mode"
     >
-      <span className="font-mono">
-        {step ?? (decrypt ? '[ DECRYPT: ON ]' : '[ DECRYPT ]')}
-      </span>
+      {label}
     </button>
   );
 }
