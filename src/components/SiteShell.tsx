@@ -1,77 +1,54 @@
+'use client';
+
 import Link from 'next/link';
-import Image from 'next/image';
 import DecryptToggle from './DecryptToggle';
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-dvh bg-[#eef0f3] text-[#2f3b4f] [html.decrypt_&]:bg-[#05070a] [html.decrypt_&]:text-[#3fa687]">
-      <div className="mx-auto w-full max-w-5xl px-6">
+    <div className="min-h-screen flex flex-col px-6 py-8 md:px-12">
+      {/* ── HEADER ── */}
+      <header className="flex items-center justify-between mb-16">
+        <div className="flex-1">
+          <DecryptToggle />
+        </div>
 
-        {/* ── HEADER ── */}
-        <header className="flex items-center justify-between gap-6 py-5">
-          {/* Decrypt button – top left */}
-          <div className="shrink-0">
-            <DecryptToggle />
+        {/* 1. Navigations-Links zentriert */}
+        <nav className="hidden md:flex flex-1 justify-center gap-8 font-mono text-sm tracking-tighter opacity-70">
+          <Link href="/" className="hover:opacity-100 transition-opacity">home</Link>
+          <Link href="/referenzen" className="hover:opacity-100 transition-opacity">Referenzen</Link>
+          <Link href="/zu-mir" className="hover:opacity-100 transition-opacity">zu mir</Link>
+        </nav>
+
+        {/* 2. Logo vergrößert (W-16 statt W-12) */}
+        <div className="flex-1 flex justify-end">
+          <div className="w-16 h-16 relative">
+             {/* Hier dein Logo-SVG oder Image einsetzen */}
+             <div className="w-full h-full bg-[#2f3b4f] rounded-lg [html.decrypt_&]:bg-[#3fa687]" />
           </div>
+        </div>
+      </header>
 
-          {/* Nav – center */}
-          <nav className="flex items-center gap-5 text-sm font-semibold">
-            <Link href="/" className="hover:opacity-70">home</Link>
-            <span className="opacity-20">|</span>
-            <Link href="/referenzen" className="hover:opacity-70">Referenzen</Link>
-            <span className="opacity-20">|</span>
-            <Link href="/zu-mir" className="hover:opacity-70">zu mir</Link>
-          </nav>
+      <main className="flex-1 max-w-7xl mx-auto w-full">
+        {children}
+      </main>
 
-          {/* Logo – top right */}
-          <Link href="/" className="shrink-0">
-            <Image
-              src="/logo.png"
-              alt="Kahlke CyberSystems"
-              width={110}
-              height={48}
-              className="h-9 w-auto [html.decrypt_&]:hidden"
-            />
-            <Image
-              src="/logo_white_svg.svg"
-              alt="Kahlke CyberSystems"
-              width={110}
-              height={48}
-              className="hidden h-9 w-auto [html.decrypt_&]:block"
-            />
-          </Link>
-        </header>
-
-        {/* ── SEPARATOR ── */}
-        <div className="h-px w-full rounded-full bg-[#2f3b4f]/12 [html.decrypt_&]:bg-[#3fa687]/20" />
-
-        {/* ── MAIN ── */}
-        <main className="pb-20 pt-12">{children}</main>
-
-        {/* ── FOOTER SEPARATOR ── */}
-        <div className="h-px w-full rounded-full bg-[#2f3b4f]/12 [html.decrypt_&]:bg-[#3fa687]/20" />
-
-        {/* ── FOOTER ── */}
-        <footer className="py-10 text-sm text-[#2f3b4f]/70 [html.decrypt_&]:text-[#3fa687]/70">
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-            <div>
-              <div className="font-bold text-[#2f3b4f] [html.decrypt_&]:text-[#3fa687]">Kahlke CyberSystems</div>
-              <div className="mt-1">Lars Kahlke · Zähringerstrasse 35 · 3012 Bern</div>
-              <div className="mt-2 flex gap-3">
-                <a href="mailto:larskah@kcyber.ch" className="underline underline-offset-2">larskah@kcyber.ch</a>
-                <span className="opacity-30">·</span>
-                <a href="tel:+41799438610" className="underline underline-offset-2">079 943 86 10</a>
-              </div>
-            </div>
-            <div className="flex items-center gap-5">
-              <Link href="/legal/impressum" className="hover:underline">Impressum</Link>
-              <Link href="/legal/datenschutz" className="hover:underline">Datenschutz</Link>
-              <Link href="/kontakt" className="hover:underline">Kontakt</Link>
-            </div>
+      {/* ── FOOTER ── */}
+      <footer className="mt-20 border-t border-black/5 pt-10 pb-6 text-[10px] opacity-50">
+        <div className="grid gap-6 md:grid-cols-2">
+          <div>
+            <p className="font-bold">Kahlke CyberSystems</p>
+            <p>Lars Kahlke • Zähringerstrasse 35 • 3012 Bern</p>
+            <p>larskah@kcyber.ch • 079 943 86 10</p>
           </div>
-        </footer>
-
-      </div>
+          
+          {/* 5. Impressum, Datenschutz, Kontakt weiter auseinander */}
+          <div className="flex gap-8 md:justify-end">
+            <Link href="/legal" className="hover:underline">Impressum</Link>
+            <Link href="/privacy" className="hover:underline">Datenschutz</Link>
+            <Link href="/kontakt" className="hover:underline">Kontakt</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
