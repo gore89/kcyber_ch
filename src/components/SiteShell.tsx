@@ -15,7 +15,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           <DecryptToggle />
         </div>
 
-        {/* Mitte: Nav-Links (Jetzt wirklich zentriert) */}
+        {/* Mitte: Nav-Links */}
         <nav className="hidden md:flex justify-center gap-10 font-mono text-[10px] tracking-[0.2em] uppercase opacity-50">
           <Link href="/" className="hover:opacity-100 transition-opacity">home</Link>
           <Link href="/referenzen" className="hover:opacity-100 transition-opacity">Referenzen</Link>
@@ -24,7 +24,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
 
         {/* Rechts: Wechselndes Logo */}
         <div className="flex justify-end">
-          <Link href="/" className="relative block w-20 h-20 md:w-28 md:h-28>
+          <Link href="/" className="relative block w-20 h-20 md:w-28 md:h-28">
             {/* Normales Logo (Sichtbar wenn NICHT decrypt) */}
             <Image 
               src="/logo.png" 
