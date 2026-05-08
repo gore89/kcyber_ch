@@ -10,17 +10,19 @@ export default function HomePage() {
   return (
     <SiteShell>
       {/* ── HERO ── */}
-      <section className="grid gap-12 md:grid-cols-[300px_1fr] md:items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      {/* md:justify-items-center sorgt dafür, dass das Bild mittig sitzt */}
+      <section className="grid gap-12 md:grid-cols-[300px_1fr] md:items-center md:justify-items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
         
         {/* Profile image – floating card */}
-        <div className="mx-auto w-full max-w-[300px] md:mx-0 group">
-          <div className="relative h-[380px] overflow-hidden rounded-3xl 
+        {/* mx-auto zentriert auf Mobile, md:mx-0 entfernt es auf Desktop, da das Grid es mittig hält */}
+        <div className="mx-auto w-full max-w-[300px] md:mx-0 group flex justify-center">
+          <div className="relative h-[380px] w-full overflow-hidden rounded-3xl 
             /* Light Mode Shadow */
             shadow-[0_20px_50px_rgba(47,59,79,0.15),0_10px_20px_rgba(47,59,79,0.05)]
             /* Decrypt Mode Glow */
             [html.decrypt_&]:shadow-[0_0_40px_rgba(63,166,135,0.25)]
-            /* Interaction */
-            transition-all duration-700 ease-out group-hover:-translate-y-3 group-hover:rotate-1"
+            /* Interaction - Nur noch Translate, keine Rotation */
+            transition-all duration-700 ease-out group-hover:-translate-y-3"
           >
             <Image
               src="/images/_MG_3327.jpg" 
