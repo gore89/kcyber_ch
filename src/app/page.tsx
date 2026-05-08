@@ -1,14 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import SiteShell from '@/components/SiteShell';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function HomePage() {
   const { isDecrypt } = useTheme();
 
   return (
-    <SiteShell>
+    <>
       {/* ── HERO ── */}
       {/* md:justify-items-center sorgt dafür, dass das Bild mittig sitzt */}
       <section className="grid gap-12 md:grid-cols-[300px_1fr] md:items-center md:justify-items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">

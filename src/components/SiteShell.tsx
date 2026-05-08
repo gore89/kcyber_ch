@@ -24,7 +24,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
 
         {/* Rechts: Wechselndes Logo */}
         <div className="flex justify-end">
-          <Link href="/" className="relative w-16 h-16 md:w-20 md:h-20">
+          <Link href="/" className="relative block w-20 h-20 md:w-28 md:h-28>
             {/* Normales Logo (Sichtbar wenn NICHT decrypt) */}
             <Image 
               src="/logo.png" 
