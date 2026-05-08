@@ -1,49 +1,26 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import { ThemeProvider } from '@/context/ThemeContext';
+import type { Metadata } from "next";
+import { ThemeProvider } from "@/context/ThemeContext";
+import "./globals.css";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// Hier kannst du deine SEO-Daten anpassen
+export const metadata: Metadata = {
+  title: "Kahlke Cyber Systems | IT-Security für KMU",
+  description: "Professioneller Schutz für Ärzte, Kanzleien und Kleinunternehmen in der Schweiz.",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="de">
       <body>
+        {/* Der ThemeProvider muss ALLES umschließen, was im Body liegt */}
         <ThemeProvider>
           {children}
         </ThemeProvider>
       </body>
-    </html>
-  );
-}
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://kcyber.ch'),
-  title: {
-    default: 'Kahlke CyberSystems – IT-Security für KMU',
-    template: '%s | Kahlke CyberSystems',
-  },
-  description:
-    'Massgeschneiderte IT-Security für KMU in der Schweiz – professioneller Schutz für Ärzte, Kanzleien und Kleinunternehmen.',
-  keywords: [
-    'IT-Security KMU Schweiz',
-    'Cybersecurity Spezialist',
-    'IT-Sicherheit Bern',
-    'Firewall Härtung',
-    'Ransomware Recovery',
-    'DSG Audit',
-  ],
-  openGraph: {
-    title: 'Kahlke CyberSystems – IT-Security für KMU',
-    description:
-      'Professioneller Schutz für Ärzte, Kanzleien und Kleinunternehmen. Security-Checks, Härtung, Recovery und Awareness.',
-    type: 'website',
-    locale: 'de_CH',
-    url: 'https://kcyber.ch',
-  },
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="de">
-      <body>{children}</body>
     </html>
   );
 }
