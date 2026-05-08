@@ -5,7 +5,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── CSS VARIABLES ── */
+/* ── CSS VARIABLEN ── */
 :root {
   --navy:        #2f3b4f;
   --navy-light:  #3d4f68;
@@ -14,46 +14,37 @@
   --green-1:     #056346;
   --green-2:     #3fa687;
   --decrypt-bg:  #05070a;
-  --decrypt-card:#0d1117;
+  --decrypt-card: rgba(13, 17, 23, 0.8);
 }
 
-/* ── BASE & RESET ── */
+/* ── BASIS RESET (Fix gegen den weißen Rahmen) ── */
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  /* Das killt den weißen Rand und sorgt für saubere Farben */
   background-color: var(--neutral-bg);
   color: var(--navy);
   font-family: Lato, system-ui, -apple-system, sans-serif;
   overflow-x: hidden; /* Verhindert horizontales Wackeln */
 }
 
-/* smooth transition on mode switch – everything fades */
+/* Weiche Übergänge für den Modus-Wechsel */
 *, *::before, *::after {
-  transition:
-    background-color 0.35s ease,
-    color 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    opacity 0.35s ease;
+  transition: 
+    background-color 0.4s ease, 
+    color 0.4s ease, 
+    border-color 0.4s ease, 
+    box-shadow 0.4s ease,
+    opacity 0.4s ease;
 }
 
-/* Snappy hover for interactive elements */
-button, a, .group {
-  transition: all 0.2s ease-in-out;
-}
-
-/* ── LINK COLORS – No Purple Bug ── */
+/* ── LINK FIX (Kein Lila mehr!) ── */
 a, a:visited { 
   color: inherit; 
   text-decoration: none;
 }
-a:hover { 
-  opacity: 0.8; 
-}
 
-/* ── DECRYPT MODE ── */
+/* ── DECRYPT MODE STYLES ── */
 html.decrypt {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
 }
@@ -63,45 +54,58 @@ html.decrypt body {
   color: var(--green-2);
 }
 
-/* Terminal block cursor - Slightly larger and semi-transparent */
+/* Scanlines: Der subtile Röhrenmonitor-Look */
+html.decrypt body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998; /* Unter dem Blackout, aber über der Seite */
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  opacity: 0.6;
+}
+
+/* Der Hacker-Cursor */
 html.decrypt * {
-  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='20'><rect width='12' height='20' fill='%233fa687' fill-opacity='0.6'/></svg>") 6 10, auto !important;
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='20'><rect width='12' height='20' fill='%233fa687' fill-opacity='0.5'/></svg>") 6 10, auto !important;
 }
 
 html.decrypt a, html.decrypt button {
   cursor: pointer !important;
 }
 
-/* Enhanced Scanlines */
-html.decrypt body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.2) 2px,
-    rgba(0, 0, 0, 0.2) 4px
-  );
-  opacity: 0.5;
-}
-
-/* Glow Effect */
+/* Glow-Effekt für Texte */
 html.decrypt .glow {
   text-shadow: 0 0 15px rgba(63, 166, 135, 0.5);
 }
 
-/* ── ANIMATIONS ── */
+/* ── ANIMATIONEN ── */
+
+/* Der "Glitch" beim Button-Klick */
 @keyframes glitch {
   0%   { transform: translate(0); filter: none; }
-  15%  { transform: translate(-2px, 1px); filter: hue-rotate(20deg) brightness(1.2); }
-  35%  { transform: translate(2px, -1px); filter: hue-rotate(-20deg); }
+  20%  { transform: translate(-3px, 2px); filter: hue-rotate(90deg) brightness(1.2); }
+  40%  { transform: translate(3px, -2px); filter: hue-rotate(-90deg); }
+  60%  { transform: translate(-1px, 1px); filter: saturate(2); }
   100% { transform: translate(0); filter: none; }
 }
 
 .glitch {
-  animation: glitch 0.4s ease-in-out;
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+/* Blackout-Erscheinen (hart und buggy) */
+.blackout-enter {
+  animation: blackout-flash 0.1s steps(2) forwards;
+}
+
+@keyframes blackout-flash {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
